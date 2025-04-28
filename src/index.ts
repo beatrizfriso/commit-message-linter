@@ -11,6 +11,11 @@ async function run(): Promise<void> {
     const commitMessage = execSync('git log -1 --pretty=%B').toString().trim();
     core.info(`Mensagem do último commit: "${commitMessage}"`);
 
+    if (commitMessage.startsWith('Merge pull request')) {
+      core.info('💡 Commit de merge detectado, ignorando a validação do padrão');
+      return;
+    }
+
     const regex = new RegExp(pattern);
 
     if (!regex.test(commitMessage)) {
