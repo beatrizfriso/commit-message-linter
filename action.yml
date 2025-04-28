@@ -1,0 +1,13 @@
+name: 'Commit Message Linter'
+description: 'Valida se a mensagem do commit segue o padrão definido.'
+inputs:
+  pattern:
+    description: 'Regex do padrão de commit'
+    required: true
+  fail:
+    description: 'Se deve falhar o workflow em caso de erro'
+    required: false
+    default: 'true'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
