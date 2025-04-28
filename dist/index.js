@@ -25689,12 +25689,15 @@ async function run() {
         const pattern = core.getInput('pattern');
         const shouldFail = core.getInput('fail') === 'true';
         core.info(`Usando o padrão de commit: ${pattern}`);
-        // Busca as mensagens dos commits
         const commitMessage = (0, child_process_1.execSync)('git log -1 --pretty=%B').toString().trim();
         core.info(`Mensagem do último commit: "${commitMessage}"`);
+        if (commitMessage.startsWith('Merge pull request')) {
+            core.info('💡 Commit de merge detectado, ignorando a validação do padrão');
+            return;
+        }
         const regex = new RegExp(pattern);
         if (!regex.test(commitMessage)) {
-            const message = `❌ A mensagem de commit não segue o padrão: "${pattern}"`;
+            const message = `❌ A mensagem de commit não segue o padrão: "${pattern}" ❌`;
             if (shouldFail) {
                 core.setFailed(message);
             }
@@ -25703,7 +25706,7 @@ async function run() {
             }
         }
         else {
-            core.info('✅ A mensagem de commit segue o padrão.');
+            core.info('✅ A mensagem de commit segue o padrão ✅');
         }
     }
     catch (error) {
