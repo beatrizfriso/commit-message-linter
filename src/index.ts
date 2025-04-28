@@ -8,14 +8,13 @@ async function run(): Promise<void> {
 
     core.info(`Usando o padrão de commit: ${pattern}`);
 
-    // Busca as mensagens dos commits
     const commitMessage = execSync('git log -1 --pretty=%B').toString().trim();
     core.info(`Mensagem do último commit: "${commitMessage}"`);
 
     const regex = new RegExp(pattern);
 
     if (!regex.test(commitMessage)) {
-      const message = `❌ A mensagem de commit não segue o padrão: "${pattern}"`;
+      const message = `❌ A mensagem de commit não segue o padrão: "${pattern}" ❌`;
 
       if (shouldFail) {
         core.setFailed(message);
@@ -23,7 +22,7 @@ async function run(): Promise<void> {
         core.warning(message);
       }
     } else {
-      core.info('✅ A mensagem de commit segue o padrão.');
+      core.info('✅ A mensagem de commit segue o padrão ✅');
     }
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);

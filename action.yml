@@ -1,5 +1,5 @@
 name: 'Commit Message Linter'
-description: 'Valida se a mensagem do commit segue o padrão definido.'
+description: 'Valida se a mensagem do commit segue o padrão de mensagens de commits convencionais'
 inputs:
   pattern:
     description: 'Regex do padrão de commit'

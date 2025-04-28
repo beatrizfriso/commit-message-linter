@@ -7,8 +7,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "types": ["node"],         // <-- Adicione isso
-    "lib": ["es2020"]           // <-- Pode deixar assim também
+    "types": ["node"],        
+    "lib": ["es2020"]        
   },
   "include": ["src"]
 }
